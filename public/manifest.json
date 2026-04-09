@@ -1,0 +1,21 @@
+{
+  "name": "One.safari",
+  "short_name": "One.safari",
+  "description": "Direct access to guides, cars & permits — removing middlemen from the safari industry.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f1eb",
+  "theme_color": "#2d4a32",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
