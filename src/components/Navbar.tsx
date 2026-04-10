@@ -29,7 +29,7 @@ const Navbar = () => {
           <a href="#services" className="text-sm font-medium text-muted-foreground py-2">Services</a>
           <a href="#how-it-works" className="text-sm font-medium text-muted-foreground py-2">How It Works</a>
           <a href="#about" className="text-sm font-medium text-muted-foreground py-2">About</a>
-          <Button size="sm" className="w-fit">Get Started</Button>
+          <a href="/auth"><Button size="sm" className="w-fit">Get Started</Button></a>
         </div>
       )}
     </nav>
