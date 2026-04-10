@@ -14,7 +14,247 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          created_at: string
+          end_date: string
+          guide_id: string | null
+          id: string
+          notes: string | null
+          operator_id: string
+          permit_id: string | null
+          start_date: string
+          status: Database["public"]["Enums"]["booking_status"]
+          total_price: number
+          updated_at: string
+          vehicle_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          guide_id?: string | null
+          id?: string
+          notes?: string | null
+          operator_id: string
+          permit_id?: string | null
+          start_date: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          total_price?: number
+          updated_at?: string
+          vehicle_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          guide_id?: string | null
+          id?: string
+          notes?: string | null
+          operator_id?: string
+          permit_id?: string | null
+          start_date?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          total_price?: number
+          updated_at?: string
+          vehicle_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_guide_id_fkey"
+            columns: ["guide_id"]
+            isOneToOne: false
+            referencedRelation: "guides"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_permit_id_fkey"
+            columns: ["permit_id"]
+            isOneToOne: false
+            referencedRelation: "permits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guides: {
+        Row: {
+          availability_status: string
+          bio: string | null
+          created_at: string
+          daily_rate: number
+          id: string
+          languages: string[]
+          location: string | null
+          name: string
+          photo_url: string | null
+          rating: number
+          review_count: number
+          specializations: string[]
+          supplier_id: string | null
+          updated_at: string
+          years_experience: number
+        }
+        Insert: {
+          availability_status?: string
+          bio?: string | null
+          created_at?: string
+          daily_rate?: number
+          id?: string
+          languages?: string[]
+          location?: string | null
+          name: string
+          photo_url?: string | null
+          rating?: number
+          review_count?: number
+          specializations?: string[]
+          supplier_id?: string | null
+          updated_at?: string
+          years_experience?: number
+        }
+        Update: {
+          availability_status?: string
+          bio?: string | null
+          created_at?: string
+          daily_rate?: number
+          id?: string
+          languages?: string[]
+          location?: string | null
+          name?: string
+          photo_url?: string | null
+          rating?: number
+          review_count?: number
+          specializations?: string[]
+          supplier_id?: string | null
+          updated_at?: string
+          years_experience?: number
+        }
+        Relationships: []
+      }
+      permits: {
+        Row: {
+          available_slots: number
+          country: string
+          created_at: string
+          description: string | null
+          id: string
+          park_name: string
+          permit_type: string
+          price: number
+          updated_at: string
+        }
+        Insert: {
+          available_slots?: number
+          country?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          park_name: string
+          permit_type?: string
+          price?: number
+          updated_at?: string
+        }
+        Update: {
+          available_slots?: number
+          country?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          park_name?: string
+          permit_type?: string
+          price?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company_name: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+          user_id: string
+          user_type: Database["public"]["Enums"]["user_type"]
+        }
+        Insert: {
+          avatar_url?: string | null
+          company_name?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+          user_type?: Database["public"]["Enums"]["user_type"]
+        }
+        Update: {
+          avatar_url?: string | null
+          company_name?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+          user_type?: Database["public"]["Enums"]["user_type"]
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          capacity: number
+          created_at: string
+          daily_rate: number
+          features: string[]
+          id: string
+          is_available: boolean
+          location: string | null
+          name: string
+          photo_url: string | null
+          supplier_id: string | null
+          transmission: string
+          updated_at: string
+          vehicle_type: string
+        }
+        Insert: {
+          capacity?: number
+          created_at?: string
+          daily_rate?: number
+          features?: string[]
+          id?: string
+          is_available?: boolean
+          location?: string | null
+          name: string
+          photo_url?: string | null
+          supplier_id?: string | null
+          transmission?: string
+          updated_at?: string
+          vehicle_type?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          daily_rate?: number
+          features?: string[]
+          id?: string
+          is_available?: boolean
+          location?: string | null
+          name?: string
+          photo_url?: string | null
+          supplier_id?: string | null
+          transmission?: string
+          updated_at?: string
+          vehicle_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +263,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      booking_status: "pending" | "confirmed" | "cancelled" | "completed"
+      user_type: "operator" | "supplier"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +391,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      booking_status: ["pending", "confirmed", "cancelled", "completed"],
+      user_type: ["operator", "supplier"],
+    },
   },
 } as const

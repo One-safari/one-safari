@@ -46,9 +46,11 @@ const Hero = () => (
         transition={{ duration: 0.6, delay: 0.5 }}
         className="flex flex-col sm:flex-row gap-4 justify-center"
       >
-        <Button size="lg" className="text-base gap-2">
-          Request Access <ArrowRight size={18} />
-        </Button>
+        <a href="/auth">
+          <Button size="lg" className="text-base gap-2">
+            Request Access <ArrowRight size={18} />
+          </Button>
+        </a>
         <Button size="lg" variant="outline" className="text-base border-primary-foreground/30 text-primary-foreground bg-transparent hover:bg-primary-foreground/10">
           See How It Works
         </Button>
