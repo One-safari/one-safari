@@ -11,8 +11,26 @@ import Vehicles from "./pages/Vehicles.tsx";
 import Permits from "./pages/Permits.tsx";
 import MyListings from "./pages/MyListings.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { useAuth } from "./hooks/useAuth.tsx";
 
 const queryClient = new QueryClient();
+
+const AppRoutes = () => {
+  useAuth();
+
+  return (
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/guides" element={<Guides />} />
+      <Route path="/vehicles" element={<Vehicles />} />
+      <Route path="/permits" element={<Permits />} />
+      <Route path="/my-listings" element={<MyListings />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -20,16 +38,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/guides" element={<Guides />} />
-          <Route path="/vehicles" element={<Vehicles />} />
-          <Route path="/permits" element={<Permits />} />
-          <Route path="/my-listings" element={<MyListings />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppRoutes />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
