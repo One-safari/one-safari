@@ -16,14 +16,13 @@ export const useAuth = () => {
         setLoading(false);
 
         if (event === "SIGNED_IN" && session) {
-          // Only redirect if on auth page or home
-          if (location.pathname === "/auth" || location.pathname === "/") {
+          if (location.pathname === "/auth") {
             navigate("/dashboard", { replace: true });
           }
         }
 
         if (event === "SIGNED_OUT") {
-          navigate("/auth", { replace: true });
+          navigate("/", { replace: true });
         }
       }
     );
