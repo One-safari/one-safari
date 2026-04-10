@@ -16,7 +16,7 @@ export const useAuth = () => {
         setLoading(false);
 
         if (event === "SIGNED_IN" && session) {
-          if (location.pathname === "/auth") {
+          if (location.pathname === "/auth" || location.pathname === "/") {
             navigate("/dashboard", { replace: true });
           }
         }
