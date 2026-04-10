@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 import Guides from "./pages/Guides.tsx";
 import Vehicles from "./pages/Vehicles.tsx";
 import Permits from "./pages/Permits.tsx";
+import MyListings from "./pages/MyListings.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/guides" element={<Guides />} />
           <Route path="/vehicles" element={<Vehicles />} />
           <Route path="/permits" element={<Permits />} />
+          <Route path="/my-listings" element={<MyListings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

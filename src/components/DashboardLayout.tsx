@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, Users, Car, FileText, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, Users, Car, FileText, LogOut, Menu, X, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { User } from "@supabase/supabase-js";
 
@@ -10,6 +10,7 @@ const navItems = [
   { label: "Guides", icon: Users, path: "/guides" },
   { label: "Vehicles", icon: Car, path: "/vehicles" },
   { label: "Permits", icon: FileText, path: "/permits" },
+  { label: "My Listings", icon: Package, path: "/my-listings" },
 ];
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
