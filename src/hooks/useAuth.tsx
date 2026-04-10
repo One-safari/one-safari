@@ -10,28 +10,36 @@ export const useAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fetchUserType = async (userId: string) => {
-    const { data } = await supabase
-      .from("profiles")
-      .select("user_type")
-      .eq("user_id", userId)
-      .single();
-    return data?.user_type || "operator";
-  };
-
   useEffect(() => {
+    let isMounted = true;
+
+    const fetchUserType = async (userId: string) => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("user_type")
+        .eq("user_id", userId)
+        .single();
+      return data?.user_type || "operator";
+    };
+
+    // Set up listener first
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
+        if (!isMounted) return;
         setSession(session);
         setLoading(false);
 
         if (event === "SIGNED_IN" && session) {
-          const type = await fetchUserType(session.user.id);
-          setUserType(type);
-
-          if (location.pathname === "/auth" || location.pathname === "/") {
-            navigate(type === "supplier" ? "/supplier" : "/dashboard", { replace: true });
-          }
+          // Use setTimeout to avoid async in callback causing React issues
+          setTimeout(async () => {
+            if (!isMounted) return;
+            const type = await fetchUserType(session.user.id);
+            if (!isMounted) return;
+            setUserType(type);
+            if (location.pathname === "/auth" || location.pathname === "/") {
+              navigate(type === "supplier" ? "/supplier" : "/dashboard", { replace: true });
+            }
+          }, 0);
         }
 
         if (event === "SIGNED_OUT") {
@@ -41,16 +49,21 @@ export const useAuth = () => {
       }
     );
 
+    // Then get current session
     supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!isMounted) return;
       setSession(session);
       if (session?.user) {
         const type = await fetchUserType(session.user.id);
-        setUserType(type);
+        if (isMounted) setUserType(type);
       }
-      setLoading(false);
+      if (isMounted) setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate, location.pathname]);
 
   return { session, loading, userType };
