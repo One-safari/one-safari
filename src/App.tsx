@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 import Guides from "./pages/Guides.tsx";
 import Vehicles from "./pages/Vehicles.tsx";
 import Permits from "./pages/Permits.tsx";
+import MyListings from "./pages/MyListings.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
