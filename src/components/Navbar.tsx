@@ -16,7 +16,7 @@ const Navbar = () => {
           <a href="#services" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Services</a>
           <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
           <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">About</a>
-          <Button size="sm">Get Started</Button>
+          <a href="/auth"><Button size="sm">Get Started</Button></a>
         </div>
 
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
